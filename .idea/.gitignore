@@ -1,0 +1,36 @@
+# === Java ===
+*.class
+*.jar
+*.war
+*.ear
+
+# === Maven ===
+/target/
+
+# === IntelliJ IDEA ===
+.idea/
+*.iml
+
+# === OS-specific ===
+.DS_Store
+Thumbs.db
+
+# === Logs and Temp Files ===
+*.log
+*.tmp
+
+# === XML Files (only top-level) ===
+*.xml
+
+# Optional: exclude XMLs only in root directory, but not in src
+# Uncomment if needed:
+# /*.xml
+
+# === Build Tools ===
+/out/
+
+# === Environment Files ===
+.env
+
+# === Misc ===
+*.swp
