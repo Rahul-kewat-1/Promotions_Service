@@ -4,9 +4,9 @@
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.example</groupId>
-    <artifactId>springboot-java21-demo</artifactId>
+    <artifactId>promotion-service</artifactId>
     <version>1.0.0</version>
-    <name>Spring Boot Java 21 Demo</name>
+    <name>promotion service</name>
     <description>Stable Spring Boot 3 project using Java 21</description>
     <packaging>jar</packaging>
 
@@ -18,7 +18,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>${spring.boot.version}</version>
+        <version>3.2.5</version>
         <relativePath/>
     </parent>
 

@@ -1,0 +1,58 @@
+<Configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <Property name="LOG_PATH">/var/log/ne/games/java-beapi</Property>
+        <Property name="LOG_FILE_NAME">promotion-application.log</Property>
+        <Property name="LOG_FILE">${LOG_PATH}/${LOG_FILE_NAME}</Property>
+        <Property name="REQUEST_RESPONSE_LOG_FILE">${LOG_PATH}/promotion-response.log</Property>
+        <Property name="CONSOLE_LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{traceId}] %-5p [%t] %c{1.} - %msg%n</Property>
+        <Property name="REQUEST_RESPONSE_PATTERN">info: %d{yyyy-MM-dd'T'HH:mm:ss.SSS'Z'} [%X{traceId}] [PROMOTION_LOGGER] %msg%n</Property>
+    </Properties>
+
+    <Appenders>
+        <!-- Console Logger -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${CONSOLE_LOG_PATTERN}"/>
+        </Console>
+
+        <!-- Main application log file -->
+        <RollingFile name="FileAppender" fileName="${LOG_FILE}" filePattern="${LOG_FILE}-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="${CONSOLE_LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100MB"/>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+        <!-- Request-Response Log File -->
+        <RollingFile name="RequestResponseFile" fileName="${REQUEST_RESPONSE_LOG_FILE}"
+                     filePattern="${REQUEST_RESPONSE_LOG_FILE}-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="${REQUEST_RESPONSE_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="50MB"/>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- Root logger -->
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileAppender"/>
+        </Root>
+
+        <!-- General application logs -->
+        <Logger name="com.example" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileAppender"/>
+        </Logger>
+
+        <!-- Request-Response Logger -->
+        <Logger name="API_LOGGER" level="INFO" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RequestResponseFile"/>
+        </Logger>
+    </Loggers>
+</Configuration>
